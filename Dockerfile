@@ -30,4 +30,4 @@ ENV PYTHONPATH=/app
 EXPOSE 8000
 
 # Run gunicorn
-CMD ["gunicorn", "--bind", "0.0.0.0:5000", "wsgi:application"]
+CMD ["gunicorn","wsgi:application"]
