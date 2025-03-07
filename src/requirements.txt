@@ -1,0 +1,4 @@
+flask
+cors
+python-magic
+flask_cors
