@@ -123,7 +123,7 @@ def setup_routes(app):
         static_data = get_all_books_static()
         if not static_data:
             return jsonify([]), 200
-
+        
         result = []
         for data in static_data:
             result.append({
