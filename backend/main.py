@@ -15,7 +15,7 @@ initialize_databases()
 setup_routes(app)
 
 # Set up file serving
-setup_file_serving(app)
+app = setup_file_serving(app)
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run_server()  # This will run on port 5000
