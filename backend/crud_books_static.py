@@ -5,10 +5,10 @@ DATABASE_STATIC_PATH = "database/books_static.db"
 
 # Default URL patterns
 DEFAULT_PICTURE_URL = (
-    "https://bookslibrarybackend-production.up.railway.app/db/pictures/books_id.png"
+    "https://bookslibraryfileserver-production.up.railway.app/db/pictures/books_id.png"
 )
 DEFAULT_DOWNLOAD_URL = (
-    "https://bookslibrarybackend-production.up.railway.app/db/downloads/books_id.pdf"
+    "https://bookslibraryfileserver-production.up.railway.app/db/downloads/books_id.pdf"
 )
 
 
@@ -22,9 +22,11 @@ def add_book_static(books_id, picture_url=None, download_url=None):
     try:
         # Set default URLs if none provided
         if picture_url is None:
-            picture_url = DEFAULT_PICTURE_URL.replace("books_id", str(books_id))
+            picture_url = DEFAULT_PICTURE_URL.replace(
+                "books_id", str(books_id))
         if download_url is None:
-            download_url = DEFAULT_DOWNLOAD_URL.replace("books_id", str(books_id))
+            download_url = DEFAULT_DOWNLOAD_URL.replace(
+                "books_id", str(books_id))
 
         cursor.execute(
             """
@@ -48,7 +50,8 @@ def get_book_static(books_id):
     """
     conn = sqlite3.connect(DATABASE_STATIC_PATH)
     cursor = conn.cursor()
-    cursor.execute("SELECT * FROM books_static WHERE books_id = ?", (books_id,))
+    cursor.execute(
+        "SELECT * FROM books_static WHERE books_id = ?", (books_id,))
     static_data = cursor.fetchone()
     conn.close()
     return static_data
@@ -99,7 +102,8 @@ def delete_book_static(books_id):
     conn = sqlite3.connect(DATABASE_STATIC_PATH)
     cursor = conn.cursor()
     try:
-        cursor.execute("DELETE FROM books_static WHERE books_id = ?", (books_id,))
+        cursor.execute(
+            "DELETE FROM books_static WHERE books_id = ?", (books_id,))
         conn.commit()
         return True
     except Exception as e:
