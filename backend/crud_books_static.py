@@ -4,8 +4,12 @@ import sqlite3
 DATABASE_STATIC_PATH = "database/books_static.db"
 
 # Default URL patterns
-DEFAULT_PICTURE_URL = "http://localhost:3000/db/pictures/books_id.png"
-DEFAULT_DOWNLOAD_URL = "http://localhost:3000/db/downloads/books_id.pdf"
+DEFAULT_PICTURE_URL = (
+    "https://bookslibrarybackend-production.up.railway.app/db/pictures/books_id.png"
+)
+DEFAULT_DOWNLOAD_URL = (
+    "https://bookslibrarybackend-production.up.railway.app/db/downloads/books_id.pdf"
+)
 
 
 def add_book_static(books_id, picture_url=None, download_url=None):
