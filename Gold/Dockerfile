@@ -5,15 +5,15 @@ ENV DEBIAN_FRONTEND=noninteractive
 
 # Install supervisor, Python, and pip
 RUN apt update && apt upgrade -y
-RUN apt install python3 python3-pip -y
+RUN apt install -y supervisor python3 python3-pip wget unzip curl
 
 # Create directories for frontend and backend
 WORKDIR /app
 RUN mkdir -p /app/frontend /app/backend
 
 # Setup frontend
-#WORKDIR /app/frontend
-#COPY frontend/ ./
+WORKDIR /app/frontend
+COPY frontend/ ./
 # Uncomment these if you need to build a Node.js frontend
 # RUN apt install -y nodejs npm
 # COPY frontend/package*.json ./
@@ -30,10 +30,10 @@ COPY backend/ ./
 
 # Configure supervisor
 # Directory should already exist with Ubuntu's supervisor package
-#COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
+COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 
 # Expose necessary ports
-EXPOSE 5000
+EXPOSE 3000 5000
 
 # Start supervisor as the main process
-CMD ["gunicorn", "--bind", "0.0.0.0:5000","wsgi:application"]
+CMD ["/usr/bin/supervisord", "-c", "/etc/supervisor/conf.d/supervisord.conf"]
